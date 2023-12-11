@@ -1,0 +1,2832 @@
+Grammar
+
+    0 $accept: xml $end
+
+    1 xml: linear_layout
+    2    | relative_layout
+
+    3 child_plus: child
+    4           | child_plus child
+
+    5 child: text_view
+    6      | image_view
+    7      | button
+    8      | radio_group
+    9      | progress_bar
+   10      | linear_layout
+   11      | relative_layout
+   12      | STRING
+
+   13 radio_button_plus: radio_button
+   14                  | radio_button_plus radio_button
+
+   15 str_or_int: STRING
+   16           | INT
+
+   17 $@1: ε
+
+   18 $@2: ε
+
+   19 linear_layout: LESS_THAN LINEAR_LAYOUT $@1 linear_attributes GREATER_THAN $@2 child_plus LESS_THAN SLASH LINEAR_LAYOUT GREATER_THAN
+
+   20 linear_attributes: linear_attribute
+   21                  | linear_attribute linear_attributes
+
+   22 $@3: ε
+
+   23 linear_attribute: ANDROID COLON $@3 linear_attribute_name
+
+   24 $@4: ε
+
+   25 $@5: ε
+
+   26 linear_attribute_name: LAYOUT_WIDTH $@4 ASSIGN $@5 str_or_int
+
+   27 $@6: ε
+
+   28 $@7: ε
+
+   29 linear_attribute_name: LAYOUT_HEIGHT $@6 ASSIGN $@7 str_or_int
+   30                      | ORIENTATION ASSIGN STRING
+   31                      | ID ASSIGN STRING
+
+   32 $@8: ε
+
+   33 $@9: ε
+
+   34 relative_layout: LESS_THAN RELATIVE_LAYOUT $@8 relative_attributes GREATER_THAN $@9 child_plus LESS_THAN SLASH RELATIVE_LAYOUT GREATER_THAN
+
+   35 relative_attributes: relative_attribute
+   36                    | relative_attribute relative_attributes
+
+   37 $@10: ε
+
+   38 relative_attribute: ANDROID COLON $@10 relative_attribute_name
+
+   39 $@11: ε
+
+   40 $@12: ε
+
+   41 relative_attribute_name: LAYOUT_WIDTH $@11 ASSIGN $@12 str_or_int
+
+   42 $@13: ε
+
+   43 $@14: ε
+
+   44 relative_attribute_name: LAYOUT_HEIGHT $@13 ASSIGN $@14 str_or_int
+   45                        | ID ASSIGN STRING
+
+   46 $@15: ε
+
+   47 text_view: LESS_THAN TEXT_VIEW $@15 text_attributes SLASH GREATER_THAN
+
+   48 text_attributes: text_attribute
+   49                | text_attribute text_attributes
+
+   50 $@16: ε
+
+   51 text_attribute: ANDROID COLON $@16 text_attribute_name
+
+   52 $@17: ε
+
+   53 $@18: ε
+
+   54 text_attribute_name: LAYOUT_WIDTH $@17 ASSIGN $@18 str_or_int
+
+   55 $@19: ε
+
+   56 $@20: ε
+
+   57 text_attribute_name: LAYOUT_HEIGHT $@19 ASSIGN $@20 str_or_int
+
+   58 $@21: ε
+
+   59 text_attribute_name: TEXT $@21 ASSIGN STRING
+   60                    | ID ASSIGN STRING
+   61                    | TEXT_COLOR ASSIGN STRING
+
+   62 $@22: ε
+
+   63 image_view: LESS_THAN IMAGE_VIEW $@22 image_view_attributes SLASH GREATER_THAN
+
+   64 image_view_attributes: image_view_attribute
+   65                      | image_view_attribute image_view_attributes
+
+   66 $@23: ε
+
+   67 image_view_attribute: ANDROID COLON $@23 image_view_attribute_name
+
+   68 $@24: ε
+
+   69 $@25: ε
+
+   70 image_view_attribute_name: LAYOUT_WIDTH $@24 ASSIGN $@25 str_or_int
+
+   71 $@26: ε
+
+   72 $@27: ε
+
+   73 image_view_attribute_name: LAYOUT_HEIGHT $@26 ASSIGN $@27 str_or_int
+
+   74 $@28: ε
+
+   75 image_view_attribute_name: SRC $@28 ASSIGN STRING
+   76                          | ID ASSIGN STRING
+   77                          | PADDING ASSIGN INT
+
+   78 $@29: ε
+
+   79 button: LESS_THAN BUTTON $@29 button_attributes SLASH GREATER_THAN
+
+   80 button_attributes: button_attribute
+   81                  | button_attribute button_attributes
+
+   82 $@30: ε
+
+   83 button_attribute: ANDROID COLON $@30 button_attribute_name
+
+   84 $@31: ε
+
+   85 $@32: ε
+
+   86 button_attribute_name: LAYOUT_WIDTH $@31 ASSIGN $@32 str_or_int
+
+   87 $@33: ε
+
+   88 $@34: ε
+
+   89 button_attribute_name: LAYOUT_HEIGHT $@33 ASSIGN $@34 str_or_int
+
+   90 $@35: ε
+
+   91 button_attribute_name: TEXT $@35 ASSIGN STRING
+   92                      | ID ASSIGN STRING
+   93                      | PADDING ASSIGN INT
+
+   94 $@36: ε
+
+   95 $@37: ε
+
+   96 radio_group: LESS_THAN RADIO_GROUP $@36 radio_group_attributes GREATER_THAN $@37 radio_button_plus LESS_THAN SLASH RADIO_GROUP GREATER_THAN
+
+   97 radio_group_attributes: radio_group_attribute
+   98                       | radio_group_attribute radio_group_attributes
+
+   99 $@38: ε
+
+  100 radio_group_attribute: ANDROID COLON $@38 radio_group_attribute_name
+
+  101 $@39: ε
+
+  102 $@40: ε
+
+  103 radio_group_attribute_name: LAYOUT_WIDTH $@39 ASSIGN $@40 str_or_int
+
+  104 $@41: ε
+
+  105 $@42: ε
+
+  106 radio_group_attribute_name: LAYOUT_HEIGHT $@41 ASSIGN $@42 str_or_int
+  107                           | ID ASSIGN STRING
+  108                           | CHECKED_BUTTON ASSIGN STRING
+
+  109 $@43: ε
+
+  110 radio_group_attribute_name: AMOUNT $@43 ASSIGN INT
+
+  111 $@44: ε
+
+  112 radio_button: LESS_THAN RADIO_BUTTON $@44 radio_button_attributes SLASH GREATER_THAN
+
+  113 radio_button_attributes: radio_button_attribute
+  114                        | radio_button_attribute radio_button_attributes
+
+  115 $@45: ε
+
+  116 radio_button_attribute: ANDROID COLON $@45 radio_button_attribute_name
+
+  117 $@46: ε
+
+  118 $@47: ε
+
+  119 radio_button_attribute_name: LAYOUT_WIDTH $@46 ASSIGN $@47 str_or_int
+
+  120 $@48: ε
+
+  121 $@49: ε
+
+  122 radio_button_attribute_name: LAYOUT_HEIGHT $@48 ASSIGN $@49 str_or_int
+
+  123 $@50: ε
+
+  124 radio_button_attribute_name: TEXT $@50 ASSIGN STRING
+  125                            | ID ASSIGN STRING
+
+  126 $@51: ε
+
+  127 progress_bar: LESS_THAN PROGRESS_BAR $@51 progress_bar_attributes SLASH GREATER_THAN
+
+  128 progress_bar_attributes: progress_bar_attribute
+  129                        | progress_bar_attribute progress_bar_attributes
+
+  130 $@52: ε
+
+  131 progress_bar_attribute: ANDROID COLON $@52 progress_bar_attribute_name
+
+  132 $@53: ε
+
+  133 $@54: ε
+
+  134 progress_bar_attribute_name: LAYOUT_WIDTH $@53 ASSIGN $@54 str_or_int
+
+  135 $@55: ε
+
+  136 $@56: ε
+
+  137 progress_bar_attribute_name: LAYOUT_HEIGHT $@55 ASSIGN $@56 str_or_int
+  138                            | ID ASSIGN STRING
+  139                            | MAX ASSIGN INT
+  140                            | PROGRESS ASSIGN INT
+
+
+Terminals, with rules where they appear
+
+    $end (0) 0
+    error (256)
+    LESS_THAN (258) 19 34 47 63 79 96 112 127
+    GREATER_THAN (259) 19 34 47 63 79 96 112 127
+    COLON (260) 23 38 51 67 83 100 116 131
+    SLASH (261) 19 34 47 63 79 96 112 127
+    ASSIGN (262) 26 29 30 31 41 44 45 54 57 59 60 61 70 73 75 76 77 86 89 91 92 93 103 106 107 108 110 119 122 124 125 134 137 138 139 140
+    INT <intval> (263) 16 77 93 110 139 140
+    STRING <strval> (264) 12 15 30 31 45 59 60 61 75 76 91 92 107 108 124 125 138
+    LINEAR_LAYOUT (265) 19
+    RELATIVE_LAYOUT (266) 34
+    TEXT_VIEW (267) 47
+    IMAGE_VIEW (268) 63
+    BUTTON (269) 79
+    RADIO_BUTTON (270) 112
+    RADIO_GROUP (271) 96
+    PROGRESS_BAR (272) 127
+    ANDROID (273) 23 38 51 67 83 100 116 131
+    LAYOUT_WIDTH (274) 26 41 54 70 86 103 119 134
+    LAYOUT_HEIGHT (275) 29 44 57 73 89 106 122 137
+    ORIENTATION (276) 30
+    ID (277) 31 45 60 76 92 107 125 138
+    TEXT (278) 59 91 124
+    SRC (279) 75
+    PADDING (280) 77 93
+    MAX (281) 139
+    PROGRESS (282) 140
+    TEXT_COLOR (283) 61
+    CHECKED_BUTTON (284) 108
+    AMOUNT (285) 110
+
+
+Nonterminals, with rules where they appear
+
+    $accept (31)
+        on left: 0
+    xml (32)
+        on left: 1 2
+        on right: 0
+    child_plus (33)
+        on left: 3 4
+        on right: 4 19 34
+    child (34)
+        on left: 5 6 7 8 9 10 11 12
+        on right: 3 4
+    radio_button_plus (35)
+        on left: 13 14
+        on right: 14 96
+    str_or_int (36)
+        on left: 15 16
+        on right: 26 29 41 44 54 57 70 73 86 89 103 106 119 122 134 137
+    linear_layout (37)
+        on left: 19
+        on right: 1 10
+    $@1 (38)
+        on left: 17
+        on right: 19
+    $@2 (39)
+        on left: 18
+        on right: 19
+    linear_attributes (40)
+        on left: 20 21
+        on right: 19 21
+    linear_attribute (41)
+        on left: 23
+        on right: 20 21
+    $@3 (42)
+        on left: 22
+        on right: 23
+    linear_attribute_name (43)
+        on left: 26 29 30 31
+        on right: 23
+    $@4 (44)
+        on left: 24
+        on right: 26
+    $@5 (45)
+        on left: 25
+        on right: 26
+    $@6 (46)
+        on left: 27
+        on right: 29
+    $@7 (47)
+        on left: 28
+        on right: 29
+    relative_layout (48)
+        on left: 34
+        on right: 2 11
+    $@8 (49)
+        on left: 32
+        on right: 34
+    $@9 (50)
+        on left: 33
+        on right: 34
+    relative_attributes (51)
+        on left: 35 36
+        on right: 34 36
+    relative_attribute (52)
+        on left: 38
+        on right: 35 36
+    $@10 (53)
+        on left: 37
+        on right: 38
+    relative_attribute_name (54)
+        on left: 41 44 45
+        on right: 38
+    $@11 (55)
+        on left: 39
+        on right: 41
+    $@12 (56)
+        on left: 40
+        on right: 41
+    $@13 (57)
+        on left: 42
+        on right: 44
+    $@14 (58)
+        on left: 43
+        on right: 44
+    text_view (59)
+        on left: 47
+        on right: 5
+    $@15 (60)
+        on left: 46
+        on right: 47
+    text_attributes (61)
+        on left: 48 49
+        on right: 47 49
+    text_attribute (62)
+        on left: 51
+        on right: 48 49
+    $@16 (63)
+        on left: 50
+        on right: 51
+    text_attribute_name (64)
+        on left: 54 57 59 60 61
+        on right: 51
+    $@17 (65)
+        on left: 52
+        on right: 54
+    $@18 (66)
+        on left: 53
+        on right: 54
+    $@19 (67)
+        on left: 55
+        on right: 57
+    $@20 (68)
+        on left: 56
+        on right: 57
+    $@21 (69)
+        on left: 58
+        on right: 59
+    image_view (70)
+        on left: 63
+        on right: 6
+    $@22 (71)
+        on left: 62
+        on right: 63
+    image_view_attributes (72)
+        on left: 64 65
+        on right: 63 65
+    image_view_attribute (73)
+        on left: 67
+        on right: 64 65
+    $@23 (74)
+        on left: 66
+        on right: 67
+    image_view_attribute_name (75)
+        on left: 70 73 75 76 77
+        on right: 67
+    $@24 (76)
+        on left: 68
+        on right: 70
+    $@25 (77)
+        on left: 69
+        on right: 70
+    $@26 (78)
+        on left: 71
+        on right: 73
+    $@27 (79)
+        on left: 72
+        on right: 73
+    $@28 (80)
+        on left: 74
+        on right: 75
+    button (81)
+        on left: 79
+        on right: 7
+    $@29 (82)
+        on left: 78
+        on right: 79
+    button_attributes (83)
+        on left: 80 81
+        on right: 79 81
+    button_attribute (84)
+        on left: 83
+        on right: 80 81
+    $@30 (85)
+        on left: 82
+        on right: 83
+    button_attribute_name (86)
+        on left: 86 89 91 92 93
+        on right: 83
+    $@31 (87)
+        on left: 84
+        on right: 86
+    $@32 (88)
+        on left: 85
+        on right: 86
+    $@33 (89)
+        on left: 87
+        on right: 89
+    $@34 (90)
+        on left: 88
+        on right: 89
+    $@35 (91)
+        on left: 90
+        on right: 91
+    radio_group (92)
+        on left: 96
+        on right: 8
+    $@36 (93)
+        on left: 94
+        on right: 96
+    $@37 (94)
+        on left: 95
+        on right: 96
+    radio_group_attributes (95)
+        on left: 97 98
+        on right: 96 98
+    radio_group_attribute (96)
+        on left: 100
+        on right: 97 98
+    $@38 (97)
+        on left: 99
+        on right: 100
+    radio_group_attribute_name (98)
+        on left: 103 106 107 108 110
+        on right: 100
+    $@39 (99)
+        on left: 101
+        on right: 103
+    $@40 (100)
+        on left: 102
+        on right: 103
+    $@41 (101)
+        on left: 104
+        on right: 106
+    $@42 (102)
+        on left: 105
+        on right: 106
+    $@43 (103)
+        on left: 109
+        on right: 110
+    radio_button (104)
+        on left: 112
+        on right: 13 14
+    $@44 (105)
+        on left: 111
+        on right: 112
+    radio_button_attributes (106)
+        on left: 113 114
+        on right: 112 114
+    radio_button_attribute (107)
+        on left: 116
+        on right: 113 114
+    $@45 (108)
+        on left: 115
+        on right: 116
+    radio_button_attribute_name (109)
+        on left: 119 122 124 125
+        on right: 116
+    $@46 (110)
+        on left: 117
+        on right: 119
+    $@47 (111)
+        on left: 118
+        on right: 119
+    $@48 (112)
+        on left: 120
+        on right: 122
+    $@49 (113)
+        on left: 121
+        on right: 122
+    $@50 (114)
+        on left: 123
+        on right: 124
+    progress_bar (115)
+        on left: 127
+        on right: 9
+    $@51 (116)
+        on left: 126
+        on right: 127
+    progress_bar_attributes (117)
+        on left: 128 129
+        on right: 127 129
+    progress_bar_attribute (118)
+        on left: 131
+        on right: 128 129
+    $@52 (119)
+        on left: 130
+        on right: 131
+    progress_bar_attribute_name (120)
+        on left: 134 137 138 139 140
+        on right: 131
+    $@53 (121)
+        on left: 132
+        on right: 134
+    $@54 (122)
+        on left: 133
+        on right: 134
+    $@55 (123)
+        on left: 135
+        on right: 137
+    $@56 (124)
+        on left: 136
+        on right: 137
+
+
+State 0
+
+    0 $accept: • xml $end
+
+    LESS_THAN  shift, and go to state 1
+
+    xml              go to state 2
+    linear_layout    go to state 3
+    relative_layout  go to state 4
+
+
+State 1
+
+   19 linear_layout: LESS_THAN • LINEAR_LAYOUT $@1 linear_attributes GREATER_THAN $@2 child_plus LESS_THAN SLASH LINEAR_LAYOUT GREATER_THAN
+   34 relative_layout: LESS_THAN • RELATIVE_LAYOUT $@8 relative_attributes GREATER_THAN $@9 child_plus LESS_THAN SLASH RELATIVE_LAYOUT GREATER_THAN
+
+    LINEAR_LAYOUT    shift, and go to state 5
+    RELATIVE_LAYOUT  shift, and go to state 6
+
+
+State 2
+
+    0 $accept: xml • $end
+
+    $end  shift, and go to state 7
+
+
+State 3
+
+    1 xml: linear_layout •
+
+    $default  reduce using rule 1 (xml)
+
+
+State 4
+
+    2 xml: relative_layout •
+
+    $default  reduce using rule 2 (xml)
+
+
+State 5
+
+   19 linear_layout: LESS_THAN LINEAR_LAYOUT • $@1 linear_attributes GREATER_THAN $@2 child_plus LESS_THAN SLASH LINEAR_LAYOUT GREATER_THAN
+
+    $default  reduce using rule 17 ($@1)
+
+    $@1  go to state 8
+
+
+State 6
+
+   34 relative_layout: LESS_THAN RELATIVE_LAYOUT • $@8 relative_attributes GREATER_THAN $@9 child_plus LESS_THAN SLASH RELATIVE_LAYOUT GREATER_THAN
+
+    $default  reduce using rule 32 ($@8)
+
+    $@8  go to state 9
+
+
+State 7
+
+    0 $accept: xml $end •
+
+    $default  accept
+
+
+State 8
+
+   19 linear_layout: LESS_THAN LINEAR_LAYOUT $@1 • linear_attributes GREATER_THAN $@2 child_plus LESS_THAN SLASH LINEAR_LAYOUT GREATER_THAN
+
+    ANDROID  shift, and go to state 10
+
+    linear_attributes  go to state 11
+    linear_attribute   go to state 12
+
+
+State 9
+
+   34 relative_layout: LESS_THAN RELATIVE_LAYOUT $@8 • relative_attributes GREATER_THAN $@9 child_plus LESS_THAN SLASH RELATIVE_LAYOUT GREATER_THAN
+
+    ANDROID  shift, and go to state 13
+
+    relative_attributes  go to state 14
+    relative_attribute   go to state 15
+
+
+State 10
+
+   23 linear_attribute: ANDROID • COLON $@3 linear_attribute_name
+
+    COLON  shift, and go to state 16
+
+
+State 11
+
+   19 linear_layout: LESS_THAN LINEAR_LAYOUT $@1 linear_attributes • GREATER_THAN $@2 child_plus LESS_THAN SLASH LINEAR_LAYOUT GREATER_THAN
+
+    GREATER_THAN  shift, and go to state 17
+
+
+State 12
+
+   20 linear_attributes: linear_attribute •
+   21                  | linear_attribute • linear_attributes
+
+    ANDROID  shift, and go to state 10
+
+    $default  reduce using rule 20 (linear_attributes)
+
+    linear_attributes  go to state 18
+    linear_attribute   go to state 12
+
+
+State 13
+
+   38 relative_attribute: ANDROID • COLON $@10 relative_attribute_name
+
+    COLON  shift, and go to state 19
+
+
+State 14
+
+   34 relative_layout: LESS_THAN RELATIVE_LAYOUT $@8 relative_attributes • GREATER_THAN $@9 child_plus LESS_THAN SLASH RELATIVE_LAYOUT GREATER_THAN
+
+    GREATER_THAN  shift, and go to state 20
+
+
+State 15
+
+   35 relative_attributes: relative_attribute •
+   36                    | relative_attribute • relative_attributes
+
+    ANDROID  shift, and go to state 13
+
+    $default  reduce using rule 35 (relative_attributes)
+
+    relative_attributes  go to state 21
+    relative_attribute   go to state 15
+
+
+State 16
+
+   23 linear_attribute: ANDROID COLON • $@3 linear_attribute_name
+
+    $default  reduce using rule 22 ($@3)
+
+    $@3  go to state 22
+
+
+State 17
+
+   19 linear_layout: LESS_THAN LINEAR_LAYOUT $@1 linear_attributes GREATER_THAN • $@2 child_plus LESS_THAN SLASH LINEAR_LAYOUT GREATER_THAN
+
+    $default  reduce using rule 18 ($@2)
+
+    $@2  go to state 23
+
+
+State 18
+
+   21 linear_attributes: linear_attribute linear_attributes •
+
+    $default  reduce using rule 21 (linear_attributes)
+
+
+State 19
+
+   38 relative_attribute: ANDROID COLON • $@10 relative_attribute_name
+
+    $default  reduce using rule 37 ($@10)
+
+    $@10  go to state 24
+
+
+State 20
+
+   34 relative_layout: LESS_THAN RELATIVE_LAYOUT $@8 relative_attributes GREATER_THAN • $@9 child_plus LESS_THAN SLASH RELATIVE_LAYOUT GREATER_THAN
+
+    $default  reduce using rule 33 ($@9)
+
+    $@9  go to state 25
+
+
+State 21
+
+   36 relative_attributes: relative_attribute relative_attributes •
+
+    $default  reduce using rule 36 (relative_attributes)
+
+
+State 22
+
+   23 linear_attribute: ANDROID COLON $@3 • linear_attribute_name
+
+    LAYOUT_WIDTH   shift, and go to state 26
+    LAYOUT_HEIGHT  shift, and go to state 27
+    ORIENTATION    shift, and go to state 28
+    ID             shift, and go to state 29
+
+    linear_attribute_name  go to state 30
+
+
+State 23
+
+   19 linear_layout: LESS_THAN LINEAR_LAYOUT $@1 linear_attributes GREATER_THAN $@2 • child_plus LESS_THAN SLASH LINEAR_LAYOUT GREATER_THAN
+
+    LESS_THAN  shift, and go to state 31
+    STRING     shift, and go to state 32
+
+    child_plus       go to state 33
+    child            go to state 34
+    linear_layout    go to state 35
+    relative_layout  go to state 36
+    text_view        go to state 37
+    image_view       go to state 38
+    button           go to state 39
+    radio_group      go to state 40
+    progress_bar     go to state 41
+
+
+State 24
+
+   38 relative_attribute: ANDROID COLON $@10 • relative_attribute_name
+
+    LAYOUT_WIDTH   shift, and go to state 42
+    LAYOUT_HEIGHT  shift, and go to state 43
+    ID             shift, and go to state 44
+
+    relative_attribute_name  go to state 45
+
+
+State 25
+
+   34 relative_layout: LESS_THAN RELATIVE_LAYOUT $@8 relative_attributes GREATER_THAN $@9 • child_plus LESS_THAN SLASH RELATIVE_LAYOUT GREATER_THAN
+
+    LESS_THAN  shift, and go to state 31
+    STRING     shift, and go to state 32
+
+    child_plus       go to state 46
+    child            go to state 34
+    linear_layout    go to state 35
+    relative_layout  go to state 36
+    text_view        go to state 37
+    image_view       go to state 38
+    button           go to state 39
+    radio_group      go to state 40
+    progress_bar     go to state 41
+
+
+State 26
+
+   26 linear_attribute_name: LAYOUT_WIDTH • $@4 ASSIGN $@5 str_or_int
+
+    $default  reduce using rule 24 ($@4)
+
+    $@4  go to state 47
+
+
+State 27
+
+   29 linear_attribute_name: LAYOUT_HEIGHT • $@6 ASSIGN $@7 str_or_int
+
+    $default  reduce using rule 27 ($@6)
+
+    $@6  go to state 48
+
+
+State 28
+
+   30 linear_attribute_name: ORIENTATION • ASSIGN STRING
+
+    ASSIGN  shift, and go to state 49
+
+
+State 29
+
+   31 linear_attribute_name: ID • ASSIGN STRING
+
+    ASSIGN  shift, and go to state 50
+
+
+State 30
+
+   23 linear_attribute: ANDROID COLON $@3 linear_attribute_name •
+
+    $default  reduce using rule 23 (linear_attribute)
+
+
+State 31
+
+   19 linear_layout: LESS_THAN • LINEAR_LAYOUT $@1 linear_attributes GREATER_THAN $@2 child_plus LESS_THAN SLASH LINEAR_LAYOUT GREATER_THAN
+   34 relative_layout: LESS_THAN • RELATIVE_LAYOUT $@8 relative_attributes GREATER_THAN $@9 child_plus LESS_THAN SLASH RELATIVE_LAYOUT GREATER_THAN
+   47 text_view: LESS_THAN • TEXT_VIEW $@15 text_attributes SLASH GREATER_THAN
+   63 image_view: LESS_THAN • IMAGE_VIEW $@22 image_view_attributes SLASH GREATER_THAN
+   79 button: LESS_THAN • BUTTON $@29 button_attributes SLASH GREATER_THAN
+   96 radio_group: LESS_THAN • RADIO_GROUP $@36 radio_group_attributes GREATER_THAN $@37 radio_button_plus LESS_THAN SLASH RADIO_GROUP GREATER_THAN
+  127 progress_bar: LESS_THAN • PROGRESS_BAR $@51 progress_bar_attributes SLASH GREATER_THAN
+
+    LINEAR_LAYOUT    shift, and go to state 5
+    RELATIVE_LAYOUT  shift, and go to state 6
+    TEXT_VIEW        shift, and go to state 51
+    IMAGE_VIEW       shift, and go to state 52
+    BUTTON           shift, and go to state 53
+    RADIO_GROUP      shift, and go to state 54
+    PROGRESS_BAR     shift, and go to state 55
+
+
+State 32
+
+   12 child: STRING •
+
+    $default  reduce using rule 12 (child)
+
+
+State 33
+
+    4 child_plus: child_plus • child
+   19 linear_layout: LESS_THAN LINEAR_LAYOUT $@1 linear_attributes GREATER_THAN $@2 child_plus • LESS_THAN SLASH LINEAR_LAYOUT GREATER_THAN
+
+    LESS_THAN  shift, and go to state 56
+    STRING     shift, and go to state 32
+
+    child            go to state 57
+    linear_layout    go to state 35
+    relative_layout  go to state 36
+    text_view        go to state 37
+    image_view       go to state 38
+    button           go to state 39
+    radio_group      go to state 40
+    progress_bar     go to state 41
+
+
+State 34
+
+    3 child_plus: child •
+
+    $default  reduce using rule 3 (child_plus)
+
+
+State 35
+
+   10 child: linear_layout •
+
+    $default  reduce using rule 10 (child)
+
+
+State 36
+
+   11 child: relative_layout •
+
+    $default  reduce using rule 11 (child)
+
+
+State 37
+
+    5 child: text_view •
+
+    $default  reduce using rule 5 (child)
+
+
+State 38
+
+    6 child: image_view •
+
+    $default  reduce using rule 6 (child)
+
+
+State 39
+
+    7 child: button •
+
+    $default  reduce using rule 7 (child)
+
+
+State 40
+
+    8 child: radio_group •
+
+    $default  reduce using rule 8 (child)
+
+
+State 41
+
+    9 child: progress_bar •
+
+    $default  reduce using rule 9 (child)
+
+
+State 42
+
+   41 relative_attribute_name: LAYOUT_WIDTH • $@11 ASSIGN $@12 str_or_int
+
+    $default  reduce using rule 39 ($@11)
+
+    $@11  go to state 58
+
+
+State 43
+
+   44 relative_attribute_name: LAYOUT_HEIGHT • $@13 ASSIGN $@14 str_or_int
+
+    $default  reduce using rule 42 ($@13)
+
+    $@13  go to state 59
+
+
+State 44
+
+   45 relative_attribute_name: ID • ASSIGN STRING
+
+    ASSIGN  shift, and go to state 60
+
+
+State 45
+
+   38 relative_attribute: ANDROID COLON $@10 relative_attribute_name •
+
+    $default  reduce using rule 38 (relative_attribute)
+
+
+State 46
+
+    4 child_plus: child_plus • child
+   34 relative_layout: LESS_THAN RELATIVE_LAYOUT $@8 relative_attributes GREATER_THAN $@9 child_plus • LESS_THAN SLASH RELATIVE_LAYOUT GREATER_THAN
+
+    LESS_THAN  shift, and go to state 61
+    STRING     shift, and go to state 32
+
+    child            go to state 57
+    linear_layout    go to state 35
+    relative_layout  go to state 36
+    text_view        go to state 37
+    image_view       go to state 38
+    button           go to state 39
+    radio_group      go to state 40
+    progress_bar     go to state 41
+
+
+State 47
+
+   26 linear_attribute_name: LAYOUT_WIDTH $@4 • ASSIGN $@5 str_or_int
+
+    ASSIGN  shift, and go to state 62
+
+
+State 48
+
+   29 linear_attribute_name: LAYOUT_HEIGHT $@6 • ASSIGN $@7 str_or_int
+
+    ASSIGN  shift, and go to state 63
+
+
+State 49
+
+   30 linear_attribute_name: ORIENTATION ASSIGN • STRING
+
+    STRING  shift, and go to state 64
+
+
+State 50
+
+   31 linear_attribute_name: ID ASSIGN • STRING
+
+    STRING  shift, and go to state 65
+
+
+State 51
+
+   47 text_view: LESS_THAN TEXT_VIEW • $@15 text_attributes SLASH GREATER_THAN
+
+    $default  reduce using rule 46 ($@15)
+
+    $@15  go to state 66
+
+
+State 52
+
+   63 image_view: LESS_THAN IMAGE_VIEW • $@22 image_view_attributes SLASH GREATER_THAN
+
+    $default  reduce using rule 62 ($@22)
+
+    $@22  go to state 67
+
+
+State 53
+
+   79 button: LESS_THAN BUTTON • $@29 button_attributes SLASH GREATER_THAN
+
+    $default  reduce using rule 78 ($@29)
+
+    $@29  go to state 68
+
+
+State 54
+
+   96 radio_group: LESS_THAN RADIO_GROUP • $@36 radio_group_attributes GREATER_THAN $@37 radio_button_plus LESS_THAN SLASH RADIO_GROUP GREATER_THAN
+
+    $default  reduce using rule 94 ($@36)
+
+    $@36  go to state 69
+
+
+State 55
+
+  127 progress_bar: LESS_THAN PROGRESS_BAR • $@51 progress_bar_attributes SLASH GREATER_THAN
+
+    $default  reduce using rule 126 ($@51)
+
+    $@51  go to state 70
+
+
+State 56
+
+   19 linear_layout: LESS_THAN • LINEAR_LAYOUT $@1 linear_attributes GREATER_THAN $@2 child_plus LESS_THAN SLASH LINEAR_LAYOUT GREATER_THAN
+   19              | LESS_THAN LINEAR_LAYOUT $@1 linear_attributes GREATER_THAN $@2 child_plus LESS_THAN • SLASH LINEAR_LAYOUT GREATER_THAN
+   34 relative_layout: LESS_THAN • RELATIVE_LAYOUT $@8 relative_attributes GREATER_THAN $@9 child_plus LESS_THAN SLASH RELATIVE_LAYOUT GREATER_THAN
+   47 text_view: LESS_THAN • TEXT_VIEW $@15 text_attributes SLASH GREATER_THAN
+   63 image_view: LESS_THAN • IMAGE_VIEW $@22 image_view_attributes SLASH GREATER_THAN
+   79 button: LESS_THAN • BUTTON $@29 button_attributes SLASH GREATER_THAN
+   96 radio_group: LESS_THAN • RADIO_GROUP $@36 radio_group_attributes GREATER_THAN $@37 radio_button_plus LESS_THAN SLASH RADIO_GROUP GREATER_THAN
+  127 progress_bar: LESS_THAN • PROGRESS_BAR $@51 progress_bar_attributes SLASH GREATER_THAN
+
+    SLASH            shift, and go to state 71
+    LINEAR_LAYOUT    shift, and go to state 5
+    RELATIVE_LAYOUT  shift, and go to state 6
+    TEXT_VIEW        shift, and go to state 51
+    IMAGE_VIEW       shift, and go to state 52
+    BUTTON           shift, and go to state 53
+    RADIO_GROUP      shift, and go to state 54
+    PROGRESS_BAR     shift, and go to state 55
+
+
+State 57
+
+    4 child_plus: child_plus child •
+
+    $default  reduce using rule 4 (child_plus)
+
+
+State 58
+
+   41 relative_attribute_name: LAYOUT_WIDTH $@11 • ASSIGN $@12 str_or_int
+
+    ASSIGN  shift, and go to state 72
+
+
+State 59
+
+   44 relative_attribute_name: LAYOUT_HEIGHT $@13 • ASSIGN $@14 str_or_int
+
+    ASSIGN  shift, and go to state 73
+
+
+State 60
+
+   45 relative_attribute_name: ID ASSIGN • STRING
+
+    STRING  shift, and go to state 74
+
+
+State 61
+
+   19 linear_layout: LESS_THAN • LINEAR_LAYOUT $@1 linear_attributes GREATER_THAN $@2 child_plus LESS_THAN SLASH LINEAR_LAYOUT GREATER_THAN
+   34 relative_layout: LESS_THAN • RELATIVE_LAYOUT $@8 relative_attributes GREATER_THAN $@9 child_plus LESS_THAN SLASH RELATIVE_LAYOUT GREATER_THAN
+   34                | LESS_THAN RELATIVE_LAYOUT $@8 relative_attributes GREATER_THAN $@9 child_plus LESS_THAN • SLASH RELATIVE_LAYOUT GREATER_THAN
+   47 text_view: LESS_THAN • TEXT_VIEW $@15 text_attributes SLASH GREATER_THAN
+   63 image_view: LESS_THAN • IMAGE_VIEW $@22 image_view_attributes SLASH GREATER_THAN
+   79 button: LESS_THAN • BUTTON $@29 button_attributes SLASH GREATER_THAN
+   96 radio_group: LESS_THAN • RADIO_GROUP $@36 radio_group_attributes GREATER_THAN $@37 radio_button_plus LESS_THAN SLASH RADIO_GROUP GREATER_THAN
+  127 progress_bar: LESS_THAN • PROGRESS_BAR $@51 progress_bar_attributes SLASH GREATER_THAN
+
+    SLASH            shift, and go to state 75
+    LINEAR_LAYOUT    shift, and go to state 5
+    RELATIVE_LAYOUT  shift, and go to state 6
+    TEXT_VIEW        shift, and go to state 51
+    IMAGE_VIEW       shift, and go to state 52
+    BUTTON           shift, and go to state 53
+    RADIO_GROUP      shift, and go to state 54
+    PROGRESS_BAR     shift, and go to state 55
+
+
+State 62
+
+   26 linear_attribute_name: LAYOUT_WIDTH $@4 ASSIGN • $@5 str_or_int
+
+    $default  reduce using rule 25 ($@5)
+
+    $@5  go to state 76
+
+
+State 63
+
+   29 linear_attribute_name: LAYOUT_HEIGHT $@6 ASSIGN • $@7 str_or_int
+
+    $default  reduce using rule 28 ($@7)
+
+    $@7  go to state 77
+
+
+State 64
+
+   30 linear_attribute_name: ORIENTATION ASSIGN STRING •
+
+    $default  reduce using rule 30 (linear_attribute_name)
+
+
+State 65
+
+   31 linear_attribute_name: ID ASSIGN STRING •
+
+    $default  reduce using rule 31 (linear_attribute_name)
+
+
+State 66
+
+   47 text_view: LESS_THAN TEXT_VIEW $@15 • text_attributes SLASH GREATER_THAN
+
+    ANDROID  shift, and go to state 78
+
+    text_attributes  go to state 79
+    text_attribute   go to state 80
+
+
+State 67
+
+   63 image_view: LESS_THAN IMAGE_VIEW $@22 • image_view_attributes SLASH GREATER_THAN
+
+    ANDROID  shift, and go to state 81
+
+    image_view_attributes  go to state 82
+    image_view_attribute   go to state 83
+
+
+State 68
+
+   79 button: LESS_THAN BUTTON $@29 • button_attributes SLASH GREATER_THAN
+
+    ANDROID  shift, and go to state 84
+
+    button_attributes  go to state 85
+    button_attribute   go to state 86
+
+
+State 69
+
+   96 radio_group: LESS_THAN RADIO_GROUP $@36 • radio_group_attributes GREATER_THAN $@37 radio_button_plus LESS_THAN SLASH RADIO_GROUP GREATER_THAN
+
+    ANDROID  shift, and go to state 87
+
+    radio_group_attributes  go to state 88
+    radio_group_attribute   go to state 89
+
+
+State 70
+
+  127 progress_bar: LESS_THAN PROGRESS_BAR $@51 • progress_bar_attributes SLASH GREATER_THAN
+
+    ANDROID  shift, and go to state 90
+
+    progress_bar_attributes  go to state 91
+    progress_bar_attribute   go to state 92
+
+
+State 71
+
+   19 linear_layout: LESS_THAN LINEAR_LAYOUT $@1 linear_attributes GREATER_THAN $@2 child_plus LESS_THAN SLASH • LINEAR_LAYOUT GREATER_THAN
+
+    LINEAR_LAYOUT  shift, and go to state 93
+
+
+State 72
+
+   41 relative_attribute_name: LAYOUT_WIDTH $@11 ASSIGN • $@12 str_or_int
+
+    $default  reduce using rule 40 ($@12)
+
+    $@12  go to state 94
+
+
+State 73
+
+   44 relative_attribute_name: LAYOUT_HEIGHT $@13 ASSIGN • $@14 str_or_int
+
+    $default  reduce using rule 43 ($@14)
+
+    $@14  go to state 95
+
+
+State 74
+
+   45 relative_attribute_name: ID ASSIGN STRING •
+
+    $default  reduce using rule 45 (relative_attribute_name)
+
+
+State 75
+
+   34 relative_layout: LESS_THAN RELATIVE_LAYOUT $@8 relative_attributes GREATER_THAN $@9 child_plus LESS_THAN SLASH • RELATIVE_LAYOUT GREATER_THAN
+
+    RELATIVE_LAYOUT  shift, and go to state 96
+
+
+State 76
+
+   26 linear_attribute_name: LAYOUT_WIDTH $@4 ASSIGN $@5 • str_or_int
+
+    INT     shift, and go to state 97
+    STRING  shift, and go to state 98
+
+    str_or_int  go to state 99
+
+
+State 77
+
+   29 linear_attribute_name: LAYOUT_HEIGHT $@6 ASSIGN $@7 • str_or_int
+
+    INT     shift, and go to state 97
+    STRING  shift, and go to state 98
+
+    str_or_int  go to state 100
+
+
+State 78
+
+   51 text_attribute: ANDROID • COLON $@16 text_attribute_name
+
+    COLON  shift, and go to state 101
+
+
+State 79
+
+   47 text_view: LESS_THAN TEXT_VIEW $@15 text_attributes • SLASH GREATER_THAN
+
+    SLASH  shift, and go to state 102
+
+
+State 80
+
+   48 text_attributes: text_attribute •
+   49                | text_attribute • text_attributes
+
+    ANDROID  shift, and go to state 78
+
+    $default  reduce using rule 48 (text_attributes)
+
+    text_attributes  go to state 103
+    text_attribute   go to state 80
+
+
+State 81
+
+   67 image_view_attribute: ANDROID • COLON $@23 image_view_attribute_name
+
+    COLON  shift, and go to state 104
+
+
+State 82
+
+   63 image_view: LESS_THAN IMAGE_VIEW $@22 image_view_attributes • SLASH GREATER_THAN
+
+    SLASH  shift, and go to state 105
+
+
+State 83
+
+   64 image_view_attributes: image_view_attribute •
+   65                      | image_view_attribute • image_view_attributes
+
+    ANDROID  shift, and go to state 81
+
+    $default  reduce using rule 64 (image_view_attributes)
+
+    image_view_attributes  go to state 106
+    image_view_attribute   go to state 83
+
+
+State 84
+
+   83 button_attribute: ANDROID • COLON $@30 button_attribute_name
+
+    COLON  shift, and go to state 107
+
+
+State 85
+
+   79 button: LESS_THAN BUTTON $@29 button_attributes • SLASH GREATER_THAN
+
+    SLASH  shift, and go to state 108
+
+
+State 86
+
+   80 button_attributes: button_attribute •
+   81                  | button_attribute • button_attributes
+
+    ANDROID  shift, and go to state 84
+
+    $default  reduce using rule 80 (button_attributes)
+
+    button_attributes  go to state 109
+    button_attribute   go to state 86
+
+
+State 87
+
+  100 radio_group_attribute: ANDROID • COLON $@38 radio_group_attribute_name
+
+    COLON  shift, and go to state 110
+
+
+State 88
+
+   96 radio_group: LESS_THAN RADIO_GROUP $@36 radio_group_attributes • GREATER_THAN $@37 radio_button_plus LESS_THAN SLASH RADIO_GROUP GREATER_THAN
+
+    GREATER_THAN  shift, and go to state 111
+
+
+State 89
+
+   97 radio_group_attributes: radio_group_attribute •
+   98                       | radio_group_attribute • radio_group_attributes
+
+    ANDROID  shift, and go to state 87
+
+    $default  reduce using rule 97 (radio_group_attributes)
+
+    radio_group_attributes  go to state 112
+    radio_group_attribute   go to state 89
+
+
+State 90
+
+  131 progress_bar_attribute: ANDROID • COLON $@52 progress_bar_attribute_name
+
+    COLON  shift, and go to state 113
+
+
+State 91
+
+  127 progress_bar: LESS_THAN PROGRESS_BAR $@51 progress_bar_attributes • SLASH GREATER_THAN
+
+    SLASH  shift, and go to state 114
+
+
+State 92
+
+  128 progress_bar_attributes: progress_bar_attribute •
+  129                        | progress_bar_attribute • progress_bar_attributes
+
+    ANDROID  shift, and go to state 90
+
+    $default  reduce using rule 128 (progress_bar_attributes)
+
+    progress_bar_attributes  go to state 115
+    progress_bar_attribute   go to state 92
+
+
+State 93
+
+   19 linear_layout: LESS_THAN LINEAR_LAYOUT $@1 linear_attributes GREATER_THAN $@2 child_plus LESS_THAN SLASH LINEAR_LAYOUT • GREATER_THAN
+
+    GREATER_THAN  shift, and go to state 116
+
+
+State 94
+
+   41 relative_attribute_name: LAYOUT_WIDTH $@11 ASSIGN $@12 • str_or_int
+
+    INT     shift, and go to state 97
+    STRING  shift, and go to state 98
+
+    str_or_int  go to state 117
+
+
+State 95
+
+   44 relative_attribute_name: LAYOUT_HEIGHT $@13 ASSIGN $@14 • str_or_int
+
+    INT     shift, and go to state 97
+    STRING  shift, and go to state 98
+
+    str_or_int  go to state 118
+
+
+State 96
+
+   34 relative_layout: LESS_THAN RELATIVE_LAYOUT $@8 relative_attributes GREATER_THAN $@9 child_plus LESS_THAN SLASH RELATIVE_LAYOUT • GREATER_THAN
+
+    GREATER_THAN  shift, and go to state 119
+
+
+State 97
+
+   16 str_or_int: INT •
+
+    $default  reduce using rule 16 (str_or_int)
+
+
+State 98
+
+   15 str_or_int: STRING •
+
+    $default  reduce using rule 15 (str_or_int)
+
+
+State 99
+
+   26 linear_attribute_name: LAYOUT_WIDTH $@4 ASSIGN $@5 str_or_int •
+
+    $default  reduce using rule 26 (linear_attribute_name)
+
+
+State 100
+
+   29 linear_attribute_name: LAYOUT_HEIGHT $@6 ASSIGN $@7 str_or_int •
+
+    $default  reduce using rule 29 (linear_attribute_name)
+
+
+State 101
+
+   51 text_attribute: ANDROID COLON • $@16 text_attribute_name
+
+    $default  reduce using rule 50 ($@16)
+
+    $@16  go to state 120
+
+
+State 102
+
+   47 text_view: LESS_THAN TEXT_VIEW $@15 text_attributes SLASH • GREATER_THAN
+
+    GREATER_THAN  shift, and go to state 121
+
+
+State 103
+
+   49 text_attributes: text_attribute text_attributes •
+
+    $default  reduce using rule 49 (text_attributes)
+
+
+State 104
+
+   67 image_view_attribute: ANDROID COLON • $@23 image_view_attribute_name
+
+    $default  reduce using rule 66 ($@23)
+
+    $@23  go to state 122
+
+
+State 105
+
+   63 image_view: LESS_THAN IMAGE_VIEW $@22 image_view_attributes SLASH • GREATER_THAN
+
+    GREATER_THAN  shift, and go to state 123
+
+
+State 106
+
+   65 image_view_attributes: image_view_attribute image_view_attributes •
+
+    $default  reduce using rule 65 (image_view_attributes)
+
+
+State 107
+
+   83 button_attribute: ANDROID COLON • $@30 button_attribute_name
+
+    $default  reduce using rule 82 ($@30)
+
+    $@30  go to state 124
+
+
+State 108
+
+   79 button: LESS_THAN BUTTON $@29 button_attributes SLASH • GREATER_THAN
+
+    GREATER_THAN  shift, and go to state 125
+
+
+State 109
+
+   81 button_attributes: button_attribute button_attributes •
+
+    $default  reduce using rule 81 (button_attributes)
+
+
+State 110
+
+  100 radio_group_attribute: ANDROID COLON • $@38 radio_group_attribute_name
+
+    $default  reduce using rule 99 ($@38)
+
+    $@38  go to state 126
+
+
+State 111
+
+   96 radio_group: LESS_THAN RADIO_GROUP $@36 radio_group_attributes GREATER_THAN • $@37 radio_button_plus LESS_THAN SLASH RADIO_GROUP GREATER_THAN
+
+    $default  reduce using rule 95 ($@37)
+
+    $@37  go to state 127
+
+
+State 112
+
+   98 radio_group_attributes: radio_group_attribute radio_group_attributes •
+
+    $default  reduce using rule 98 (radio_group_attributes)
+
+
+State 113
+
+  131 progress_bar_attribute: ANDROID COLON • $@52 progress_bar_attribute_name
+
+    $default  reduce using rule 130 ($@52)
+
+    $@52  go to state 128
+
+
+State 114
+
+  127 progress_bar: LESS_THAN PROGRESS_BAR $@51 progress_bar_attributes SLASH • GREATER_THAN
+
+    GREATER_THAN  shift, and go to state 129
+
+
+State 115
+
+  129 progress_bar_attributes: progress_bar_attribute progress_bar_attributes •
+
+    $default  reduce using rule 129 (progress_bar_attributes)
+
+
+State 116
+
+   19 linear_layout: LESS_THAN LINEAR_LAYOUT $@1 linear_attributes GREATER_THAN $@2 child_plus LESS_THAN SLASH LINEAR_LAYOUT GREATER_THAN •
+
+    $default  reduce using rule 19 (linear_layout)
+
+
+State 117
+
+   41 relative_attribute_name: LAYOUT_WIDTH $@11 ASSIGN $@12 str_or_int •
+
+    $default  reduce using rule 41 (relative_attribute_name)
+
+
+State 118
+
+   44 relative_attribute_name: LAYOUT_HEIGHT $@13 ASSIGN $@14 str_or_int •
+
+    $default  reduce using rule 44 (relative_attribute_name)
+
+
+State 119
+
+   34 relative_layout: LESS_THAN RELATIVE_LAYOUT $@8 relative_attributes GREATER_THAN $@9 child_plus LESS_THAN SLASH RELATIVE_LAYOUT GREATER_THAN •
+
+    $default  reduce using rule 34 (relative_layout)
+
+
+State 120
+
+   51 text_attribute: ANDROID COLON $@16 • text_attribute_name
+
+    LAYOUT_WIDTH   shift, and go to state 130
+    LAYOUT_HEIGHT  shift, and go to state 131
+    ID             shift, and go to state 132
+    TEXT           shift, and go to state 133
+    TEXT_COLOR     shift, and go to state 134
+
+    text_attribute_name  go to state 135
+
+
+State 121
+
+   47 text_view: LESS_THAN TEXT_VIEW $@15 text_attributes SLASH GREATER_THAN •
+
+    $default  reduce using rule 47 (text_view)
+
+
+State 122
+
+   67 image_view_attribute: ANDROID COLON $@23 • image_view_attribute_name
+
+    LAYOUT_WIDTH   shift, and go to state 136
+    LAYOUT_HEIGHT  shift, and go to state 137
+    ID             shift, and go to state 138
+    SRC            shift, and go to state 139
+    PADDING        shift, and go to state 140
+
+    image_view_attribute_name  go to state 141
+
+
+State 123
+
+   63 image_view: LESS_THAN IMAGE_VIEW $@22 image_view_attributes SLASH GREATER_THAN •
+
+    $default  reduce using rule 63 (image_view)
+
+
+State 124
+
+   83 button_attribute: ANDROID COLON $@30 • button_attribute_name
+
+    LAYOUT_WIDTH   shift, and go to state 142
+    LAYOUT_HEIGHT  shift, and go to state 143
+    ID             shift, and go to state 144
+    TEXT           shift, and go to state 145
+    PADDING        shift, and go to state 146
+
+    button_attribute_name  go to state 147
+
+
+State 125
+
+   79 button: LESS_THAN BUTTON $@29 button_attributes SLASH GREATER_THAN •
+
+    $default  reduce using rule 79 (button)
+
+
+State 126
+
+  100 radio_group_attribute: ANDROID COLON $@38 • radio_group_attribute_name
+
+    LAYOUT_WIDTH    shift, and go to state 148
+    LAYOUT_HEIGHT   shift, and go to state 149
+    ID              shift, and go to state 150
+    CHECKED_BUTTON  shift, and go to state 151
+    AMOUNT          shift, and go to state 152
+
+    radio_group_attribute_name  go to state 153
+
+
+State 127
+
+   96 radio_group: LESS_THAN RADIO_GROUP $@36 radio_group_attributes GREATER_THAN $@37 • radio_button_plus LESS_THAN SLASH RADIO_GROUP GREATER_THAN
+
+    LESS_THAN  shift, and go to state 154
+
+    radio_button_plus  go to state 155
+    radio_button       go to state 156
+
+
+State 128
+
+  131 progress_bar_attribute: ANDROID COLON $@52 • progress_bar_attribute_name
+
+    LAYOUT_WIDTH   shift, and go to state 157
+    LAYOUT_HEIGHT  shift, and go to state 158
+    ID             shift, and go to state 159
+    MAX            shift, and go to state 160
+    PROGRESS       shift, and go to state 161
+
+    progress_bar_attribute_name  go to state 162
+
+
+State 129
+
+  127 progress_bar: LESS_THAN PROGRESS_BAR $@51 progress_bar_attributes SLASH GREATER_THAN •
+
+    $default  reduce using rule 127 (progress_bar)
+
+
+State 130
+
+   54 text_attribute_name: LAYOUT_WIDTH • $@17 ASSIGN $@18 str_or_int
+
+    $default  reduce using rule 52 ($@17)
+
+    $@17  go to state 163
+
+
+State 131
+
+   57 text_attribute_name: LAYOUT_HEIGHT • $@19 ASSIGN $@20 str_or_int
+
+    $default  reduce using rule 55 ($@19)
+
+    $@19  go to state 164
+
+
+State 132
+
+   60 text_attribute_name: ID • ASSIGN STRING
+
+    ASSIGN  shift, and go to state 165
+
+
+State 133
+
+   59 text_attribute_name: TEXT • $@21 ASSIGN STRING
+
+    $default  reduce using rule 58 ($@21)
+
+    $@21  go to state 166
+
+
+State 134
+
+   61 text_attribute_name: TEXT_COLOR • ASSIGN STRING
+
+    ASSIGN  shift, and go to state 167
+
+
+State 135
+
+   51 text_attribute: ANDROID COLON $@16 text_attribute_name •
+
+    $default  reduce using rule 51 (text_attribute)
+
+
+State 136
+
+   70 image_view_attribute_name: LAYOUT_WIDTH • $@24 ASSIGN $@25 str_or_int
+
+    $default  reduce using rule 68 ($@24)
+
+    $@24  go to state 168
+
+
+State 137
+
+   73 image_view_attribute_name: LAYOUT_HEIGHT • $@26 ASSIGN $@27 str_or_int
+
+    $default  reduce using rule 71 ($@26)
+
+    $@26  go to state 169
+
+
+State 138
+
+   76 image_view_attribute_name: ID • ASSIGN STRING
+
+    ASSIGN  shift, and go to state 170
+
+
+State 139
+
+   75 image_view_attribute_name: SRC • $@28 ASSIGN STRING
+
+    $default  reduce using rule 74 ($@28)
+
+    $@28  go to state 171
+
+
+State 140
+
+   77 image_view_attribute_name: PADDING • ASSIGN INT
+
+    ASSIGN  shift, and go to state 172
+
+
+State 141
+
+   67 image_view_attribute: ANDROID COLON $@23 image_view_attribute_name •
+
+    $default  reduce using rule 67 (image_view_attribute)
+
+
+State 142
+
+   86 button_attribute_name: LAYOUT_WIDTH • $@31 ASSIGN $@32 str_or_int
+
+    $default  reduce using rule 84 ($@31)
+
+    $@31  go to state 173
+
+
+State 143
+
+   89 button_attribute_name: LAYOUT_HEIGHT • $@33 ASSIGN $@34 str_or_int
+
+    $default  reduce using rule 87 ($@33)
+
+    $@33  go to state 174
+
+
+State 144
+
+   92 button_attribute_name: ID • ASSIGN STRING
+
+    ASSIGN  shift, and go to state 175
+
+
+State 145
+
+   91 button_attribute_name: TEXT • $@35 ASSIGN STRING
+
+    $default  reduce using rule 90 ($@35)
+
+    $@35  go to state 176
+
+
+State 146
+
+   93 button_attribute_name: PADDING • ASSIGN INT
+
+    ASSIGN  shift, and go to state 177
+
+
+State 147
+
+   83 button_attribute: ANDROID COLON $@30 button_attribute_name •
+
+    $default  reduce using rule 83 (button_attribute)
+
+
+State 148
+
+  103 radio_group_attribute_name: LAYOUT_WIDTH • $@39 ASSIGN $@40 str_or_int
+
+    $default  reduce using rule 101 ($@39)
+
+    $@39  go to state 178
+
+
+State 149
+
+  106 radio_group_attribute_name: LAYOUT_HEIGHT • $@41 ASSIGN $@42 str_or_int
+
+    $default  reduce using rule 104 ($@41)
+
+    $@41  go to state 179
+
+
+State 150
+
+  107 radio_group_attribute_name: ID • ASSIGN STRING
+
+    ASSIGN  shift, and go to state 180
+
+
+State 151
+
+  108 radio_group_attribute_name: CHECKED_BUTTON • ASSIGN STRING
+
+    ASSIGN  shift, and go to state 181
+
+
+State 152
+
+  110 radio_group_attribute_name: AMOUNT • $@43 ASSIGN INT
+
+    $default  reduce using rule 109 ($@43)
+
+    $@43  go to state 182
+
+
+State 153
+
+  100 radio_group_attribute: ANDROID COLON $@38 radio_group_attribute_name •
+
+    $default  reduce using rule 100 (radio_group_attribute)
+
+
+State 154
+
+  112 radio_button: LESS_THAN • RADIO_BUTTON $@44 radio_button_attributes SLASH GREATER_THAN
+
+    RADIO_BUTTON  shift, and go to state 183
+
+
+State 155
+
+   14 radio_button_plus: radio_button_plus • radio_button
+   96 radio_group: LESS_THAN RADIO_GROUP $@36 radio_group_attributes GREATER_THAN $@37 radio_button_plus • LESS_THAN SLASH RADIO_GROUP GREATER_THAN
+
+    LESS_THAN  shift, and go to state 184
+
+    radio_button  go to state 185
+
+
+State 156
+
+   13 radio_button_plus: radio_button •
+
+    $default  reduce using rule 13 (radio_button_plus)
+
+
+State 157
+
+  134 progress_bar_attribute_name: LAYOUT_WIDTH • $@53 ASSIGN $@54 str_or_int
+
+    $default  reduce using rule 132 ($@53)
+
+    $@53  go to state 186
+
+
+State 158
+
+  137 progress_bar_attribute_name: LAYOUT_HEIGHT • $@55 ASSIGN $@56 str_or_int
+
+    $default  reduce using rule 135 ($@55)
+
+    $@55  go to state 187
+
+
+State 159
+
+  138 progress_bar_attribute_name: ID • ASSIGN STRING
+
+    ASSIGN  shift, and go to state 188
+
+
+State 160
+
+  139 progress_bar_attribute_name: MAX • ASSIGN INT
+
+    ASSIGN  shift, and go to state 189
+
+
+State 161
+
+  140 progress_bar_attribute_name: PROGRESS • ASSIGN INT
+
+    ASSIGN  shift, and go to state 190
+
+
+State 162
+
+  131 progress_bar_attribute: ANDROID COLON $@52 progress_bar_attribute_name •
+
+    $default  reduce using rule 131 (progress_bar_attribute)
+
+
+State 163
+
+   54 text_attribute_name: LAYOUT_WIDTH $@17 • ASSIGN $@18 str_or_int
+
+    ASSIGN  shift, and go to state 191
+
+
+State 164
+
+   57 text_attribute_name: LAYOUT_HEIGHT $@19 • ASSIGN $@20 str_or_int
+
+    ASSIGN  shift, and go to state 192
+
+
+State 165
+
+   60 text_attribute_name: ID ASSIGN • STRING
+
+    STRING  shift, and go to state 193
+
+
+State 166
+
+   59 text_attribute_name: TEXT $@21 • ASSIGN STRING
+
+    ASSIGN  shift, and go to state 194
+
+
+State 167
+
+   61 text_attribute_name: TEXT_COLOR ASSIGN • STRING
+
+    STRING  shift, and go to state 195
+
+
+State 168
+
+   70 image_view_attribute_name: LAYOUT_WIDTH $@24 • ASSIGN $@25 str_or_int
+
+    ASSIGN  shift, and go to state 196
+
+
+State 169
+
+   73 image_view_attribute_name: LAYOUT_HEIGHT $@26 • ASSIGN $@27 str_or_int
+
+    ASSIGN  shift, and go to state 197
+
+
+State 170
+
+   76 image_view_attribute_name: ID ASSIGN • STRING
+
+    STRING  shift, and go to state 198
+
+
+State 171
+
+   75 image_view_attribute_name: SRC $@28 • ASSIGN STRING
+
+    ASSIGN  shift, and go to state 199
+
+
+State 172
+
+   77 image_view_attribute_name: PADDING ASSIGN • INT
+
+    INT  shift, and go to state 200
+
+
+State 173
+
+   86 button_attribute_name: LAYOUT_WIDTH $@31 • ASSIGN $@32 str_or_int
+
+    ASSIGN  shift, and go to state 201
+
+
+State 174
+
+   89 button_attribute_name: LAYOUT_HEIGHT $@33 • ASSIGN $@34 str_or_int
+
+    ASSIGN  shift, and go to state 202
+
+
+State 175
+
+   92 button_attribute_name: ID ASSIGN • STRING
+
+    STRING  shift, and go to state 203
+
+
+State 176
+
+   91 button_attribute_name: TEXT $@35 • ASSIGN STRING
+
+    ASSIGN  shift, and go to state 204
+
+
+State 177
+
+   93 button_attribute_name: PADDING ASSIGN • INT
+
+    INT  shift, and go to state 205
+
+
+State 178
+
+  103 radio_group_attribute_name: LAYOUT_WIDTH $@39 • ASSIGN $@40 str_or_int
+
+    ASSIGN  shift, and go to state 206
+
+
+State 179
+
+  106 radio_group_attribute_name: LAYOUT_HEIGHT $@41 • ASSIGN $@42 str_or_int
+
+    ASSIGN  shift, and go to state 207
+
+
+State 180
+
+  107 radio_group_attribute_name: ID ASSIGN • STRING
+
+    STRING  shift, and go to state 208
+
+
+State 181
+
+  108 radio_group_attribute_name: CHECKED_BUTTON ASSIGN • STRING
+
+    STRING  shift, and go to state 209
+
+
+State 182
+
+  110 radio_group_attribute_name: AMOUNT $@43 • ASSIGN INT
+
+    ASSIGN  shift, and go to state 210
+
+
+State 183
+
+  112 radio_button: LESS_THAN RADIO_BUTTON • $@44 radio_button_attributes SLASH GREATER_THAN
+
+    $default  reduce using rule 111 ($@44)
+
+    $@44  go to state 211
+
+
+State 184
+
+   96 radio_group: LESS_THAN RADIO_GROUP $@36 radio_group_attributes GREATER_THAN $@37 radio_button_plus LESS_THAN • SLASH RADIO_GROUP GREATER_THAN
+  112 radio_button: LESS_THAN • RADIO_BUTTON $@44 radio_button_attributes SLASH GREATER_THAN
+
+    SLASH         shift, and go to state 212
+    RADIO_BUTTON  shift, and go to state 183
+
+
+State 185
+
+   14 radio_button_plus: radio_button_plus radio_button •
+
+    $default  reduce using rule 14 (radio_button_plus)
+
+
+State 186
+
+  134 progress_bar_attribute_name: LAYOUT_WIDTH $@53 • ASSIGN $@54 str_or_int
+
+    ASSIGN  shift, and go to state 213
+
+
+State 187
+
+  137 progress_bar_attribute_name: LAYOUT_HEIGHT $@55 • ASSIGN $@56 str_or_int
+
+    ASSIGN  shift, and go to state 214
+
+
+State 188
+
+  138 progress_bar_attribute_name: ID ASSIGN • STRING
+
+    STRING  shift, and go to state 215
+
+
+State 189
+
+  139 progress_bar_attribute_name: MAX ASSIGN • INT
+
+    INT  shift, and go to state 216
+
+
+State 190
+
+  140 progress_bar_attribute_name: PROGRESS ASSIGN • INT
+
+    INT  shift, and go to state 217
+
+
+State 191
+
+   54 text_attribute_name: LAYOUT_WIDTH $@17 ASSIGN • $@18 str_or_int
+
+    $default  reduce using rule 53 ($@18)
+
+    $@18  go to state 218
+
+
+State 192
+
+   57 text_attribute_name: LAYOUT_HEIGHT $@19 ASSIGN • $@20 str_or_int
+
+    $default  reduce using rule 56 ($@20)
+
+    $@20  go to state 219
+
+
+State 193
+
+   60 text_attribute_name: ID ASSIGN STRING •
+
+    $default  reduce using rule 60 (text_attribute_name)
+
+
+State 194
+
+   59 text_attribute_name: TEXT $@21 ASSIGN • STRING
+
+    STRING  shift, and go to state 220
+
+
+State 195
+
+   61 text_attribute_name: TEXT_COLOR ASSIGN STRING •
+
+    $default  reduce using rule 61 (text_attribute_name)
+
+
+State 196
+
+   70 image_view_attribute_name: LAYOUT_WIDTH $@24 ASSIGN • $@25 str_or_int
+
+    $default  reduce using rule 69 ($@25)
+
+    $@25  go to state 221
+
+
+State 197
+
+   73 image_view_attribute_name: LAYOUT_HEIGHT $@26 ASSIGN • $@27 str_or_int
+
+    $default  reduce using rule 72 ($@27)
+
+    $@27  go to state 222
+
+
+State 198
+
+   76 image_view_attribute_name: ID ASSIGN STRING •
+
+    $default  reduce using rule 76 (image_view_attribute_name)
+
+
+State 199
+
+   75 image_view_attribute_name: SRC $@28 ASSIGN • STRING
+
+    STRING  shift, and go to state 223
+
+
+State 200
+
+   77 image_view_attribute_name: PADDING ASSIGN INT •
+
+    $default  reduce using rule 77 (image_view_attribute_name)
+
+
+State 201
+
+   86 button_attribute_name: LAYOUT_WIDTH $@31 ASSIGN • $@32 str_or_int
+
+    $default  reduce using rule 85 ($@32)
+
+    $@32  go to state 224
+
+
+State 202
+
+   89 button_attribute_name: LAYOUT_HEIGHT $@33 ASSIGN • $@34 str_or_int
+
+    $default  reduce using rule 88 ($@34)
+
+    $@34  go to state 225
+
+
+State 203
+
+   92 button_attribute_name: ID ASSIGN STRING •
+
+    $default  reduce using rule 92 (button_attribute_name)
+
+
+State 204
+
+   91 button_attribute_name: TEXT $@35 ASSIGN • STRING
+
+    STRING  shift, and go to state 226
+
+
+State 205
+
+   93 button_attribute_name: PADDING ASSIGN INT •
+
+    $default  reduce using rule 93 (button_attribute_name)
+
+
+State 206
+
+  103 radio_group_attribute_name: LAYOUT_WIDTH $@39 ASSIGN • $@40 str_or_int
+
+    $default  reduce using rule 102 ($@40)
+
+    $@40  go to state 227
+
+
+State 207
+
+  106 radio_group_attribute_name: LAYOUT_HEIGHT $@41 ASSIGN • $@42 str_or_int
+
+    $default  reduce using rule 105 ($@42)
+
+    $@42  go to state 228
+
+
+State 208
+
+  107 radio_group_attribute_name: ID ASSIGN STRING •
+
+    $default  reduce using rule 107 (radio_group_attribute_name)
+
+
+State 209
+
+  108 radio_group_attribute_name: CHECKED_BUTTON ASSIGN STRING •
+
+    $default  reduce using rule 108 (radio_group_attribute_name)
+
+
+State 210
+
+  110 radio_group_attribute_name: AMOUNT $@43 ASSIGN • INT
+
+    INT  shift, and go to state 229
+
+
+State 211
+
+  112 radio_button: LESS_THAN RADIO_BUTTON $@44 • radio_button_attributes SLASH GREATER_THAN
+
+    ANDROID  shift, and go to state 230
+
+    radio_button_attributes  go to state 231
+    radio_button_attribute   go to state 232
+
+
+State 212
+
+   96 radio_group: LESS_THAN RADIO_GROUP $@36 radio_group_attributes GREATER_THAN $@37 radio_button_plus LESS_THAN SLASH • RADIO_GROUP GREATER_THAN
+
+    RADIO_GROUP  shift, and go to state 233
+
+
+State 213
+
+  134 progress_bar_attribute_name: LAYOUT_WIDTH $@53 ASSIGN • $@54 str_or_int
+
+    $default  reduce using rule 133 ($@54)
+
+    $@54  go to state 234
+
+
+State 214
+
+  137 progress_bar_attribute_name: LAYOUT_HEIGHT $@55 ASSIGN • $@56 str_or_int
+
+    $default  reduce using rule 136 ($@56)
+
+    $@56  go to state 235
+
+
+State 215
+
+  138 progress_bar_attribute_name: ID ASSIGN STRING •
+
+    $default  reduce using rule 138 (progress_bar_attribute_name)
+
+
+State 216
+
+  139 progress_bar_attribute_name: MAX ASSIGN INT •
+
+    $default  reduce using rule 139 (progress_bar_attribute_name)
+
+
+State 217
+
+  140 progress_bar_attribute_name: PROGRESS ASSIGN INT •
+
+    $default  reduce using rule 140 (progress_bar_attribute_name)
+
+
+State 218
+
+   54 text_attribute_name: LAYOUT_WIDTH $@17 ASSIGN $@18 • str_or_int
+
+    INT     shift, and go to state 97
+    STRING  shift, and go to state 98
+
+    str_or_int  go to state 236
+
+
+State 219
+
+   57 text_attribute_name: LAYOUT_HEIGHT $@19 ASSIGN $@20 • str_or_int
+
+    INT     shift, and go to state 97
+    STRING  shift, and go to state 98
+
+    str_or_int  go to state 237
+
+
+State 220
+
+   59 text_attribute_name: TEXT $@21 ASSIGN STRING •
+
+    $default  reduce using rule 59 (text_attribute_name)
+
+
+State 221
+
+   70 image_view_attribute_name: LAYOUT_WIDTH $@24 ASSIGN $@25 • str_or_int
+
+    INT     shift, and go to state 97
+    STRING  shift, and go to state 98
+
+    str_or_int  go to state 238
+
+
+State 222
+
+   73 image_view_attribute_name: LAYOUT_HEIGHT $@26 ASSIGN $@27 • str_or_int
+
+    INT     shift, and go to state 97
+    STRING  shift, and go to state 98
+
+    str_or_int  go to state 239
+
+
+State 223
+
+   75 image_view_attribute_name: SRC $@28 ASSIGN STRING •
+
+    $default  reduce using rule 75 (image_view_attribute_name)
+
+
+State 224
+
+   86 button_attribute_name: LAYOUT_WIDTH $@31 ASSIGN $@32 • str_or_int
+
+    INT     shift, and go to state 97
+    STRING  shift, and go to state 98
+
+    str_or_int  go to state 240
+
+
+State 225
+
+   89 button_attribute_name: LAYOUT_HEIGHT $@33 ASSIGN $@34 • str_or_int
+
+    INT     shift, and go to state 97
+    STRING  shift, and go to state 98
+
+    str_or_int  go to state 241
+
+
+State 226
+
+   91 button_attribute_name: TEXT $@35 ASSIGN STRING •
+
+    $default  reduce using rule 91 (button_attribute_name)
+
+
+State 227
+
+  103 radio_group_attribute_name: LAYOUT_WIDTH $@39 ASSIGN $@40 • str_or_int
+
+    INT     shift, and go to state 97
+    STRING  shift, and go to state 98
+
+    str_or_int  go to state 242
+
+
+State 228
+
+  106 radio_group_attribute_name: LAYOUT_HEIGHT $@41 ASSIGN $@42 • str_or_int
+
+    INT     shift, and go to state 97
+    STRING  shift, and go to state 98
+
+    str_or_int  go to state 243
+
+
+State 229
+
+  110 radio_group_attribute_name: AMOUNT $@43 ASSIGN INT •
+
+    $default  reduce using rule 110 (radio_group_attribute_name)
+
+
+State 230
+
+  116 radio_button_attribute: ANDROID • COLON $@45 radio_button_attribute_name
+
+    COLON  shift, and go to state 244
+
+
+State 231
+
+  112 radio_button: LESS_THAN RADIO_BUTTON $@44 radio_button_attributes • SLASH GREATER_THAN
+
+    SLASH  shift, and go to state 245
+
+
+State 232
+
+  113 radio_button_attributes: radio_button_attribute •
+  114                        | radio_button_attribute • radio_button_attributes
+
+    ANDROID  shift, and go to state 230
+
+    $default  reduce using rule 113 (radio_button_attributes)
+
+    radio_button_attributes  go to state 246
+    radio_button_attribute   go to state 232
+
+
+State 233
+
+   96 radio_group: LESS_THAN RADIO_GROUP $@36 radio_group_attributes GREATER_THAN $@37 radio_button_plus LESS_THAN SLASH RADIO_GROUP • GREATER_THAN
+
+    GREATER_THAN  shift, and go to state 247
+
+
+State 234
+
+  134 progress_bar_attribute_name: LAYOUT_WIDTH $@53 ASSIGN $@54 • str_or_int
+
+    INT     shift, and go to state 97
+    STRING  shift, and go to state 98
+
+    str_or_int  go to state 248
+
+
+State 235
+
+  137 progress_bar_attribute_name: LAYOUT_HEIGHT $@55 ASSIGN $@56 • str_or_int
+
+    INT     shift, and go to state 97
+    STRING  shift, and go to state 98
+
+    str_or_int  go to state 249
+
+
+State 236
+
+   54 text_attribute_name: LAYOUT_WIDTH $@17 ASSIGN $@18 str_or_int •
+
+    $default  reduce using rule 54 (text_attribute_name)
+
+
+State 237
+
+   57 text_attribute_name: LAYOUT_HEIGHT $@19 ASSIGN $@20 str_or_int •
+
+    $default  reduce using rule 57 (text_attribute_name)
+
+
+State 238
+
+   70 image_view_attribute_name: LAYOUT_WIDTH $@24 ASSIGN $@25 str_or_int •
+
+    $default  reduce using rule 70 (image_view_attribute_name)
+
+
+State 239
+
+   73 image_view_attribute_name: LAYOUT_HEIGHT $@26 ASSIGN $@27 str_or_int •
+
+    $default  reduce using rule 73 (image_view_attribute_name)
+
+
+State 240
+
+   86 button_attribute_name: LAYOUT_WIDTH $@31 ASSIGN $@32 str_or_int •
+
+    $default  reduce using rule 86 (button_attribute_name)
+
+
+State 241
+
+   89 button_attribute_name: LAYOUT_HEIGHT $@33 ASSIGN $@34 str_or_int •
+
+    $default  reduce using rule 89 (button_attribute_name)
+
+
+State 242
+
+  103 radio_group_attribute_name: LAYOUT_WIDTH $@39 ASSIGN $@40 str_or_int •
+
+    $default  reduce using rule 103 (radio_group_attribute_name)
+
+
+State 243
+
+  106 radio_group_attribute_name: LAYOUT_HEIGHT $@41 ASSIGN $@42 str_or_int •
+
+    $default  reduce using rule 106 (radio_group_attribute_name)
+
+
+State 244
+
+  116 radio_button_attribute: ANDROID COLON • $@45 radio_button_attribute_name
+
+    $default  reduce using rule 115 ($@45)
+
+    $@45  go to state 250
+
+
+State 245
+
+  112 radio_button: LESS_THAN RADIO_BUTTON $@44 radio_button_attributes SLASH • GREATER_THAN
+
+    GREATER_THAN  shift, and go to state 251
+
+
+State 246
+
+  114 radio_button_attributes: radio_button_attribute radio_button_attributes •
+
+    $default  reduce using rule 114 (radio_button_attributes)
+
+
+State 247
+
+   96 radio_group: LESS_THAN RADIO_GROUP $@36 radio_group_attributes GREATER_THAN $@37 radio_button_plus LESS_THAN SLASH RADIO_GROUP GREATER_THAN •
+
+    $default  reduce using rule 96 (radio_group)
+
+
+State 248
+
+  134 progress_bar_attribute_name: LAYOUT_WIDTH $@53 ASSIGN $@54 str_or_int •
+
+    $default  reduce using rule 134 (progress_bar_attribute_name)
+
+
+State 249
+
+  137 progress_bar_attribute_name: LAYOUT_HEIGHT $@55 ASSIGN $@56 str_or_int •
+
+    $default  reduce using rule 137 (progress_bar_attribute_name)
+
+
+State 250
+
+  116 radio_button_attribute: ANDROID COLON $@45 • radio_button_attribute_name
+
+    LAYOUT_WIDTH   shift, and go to state 252
+    LAYOUT_HEIGHT  shift, and go to state 253
+    ID             shift, and go to state 254
+    TEXT           shift, and go to state 255
+
+    radio_button_attribute_name  go to state 256
+
+
+State 251
+
+  112 radio_button: LESS_THAN RADIO_BUTTON $@44 radio_button_attributes SLASH GREATER_THAN •
+
+    $default  reduce using rule 112 (radio_button)
+
+
+State 252
+
+  119 radio_button_attribute_name: LAYOUT_WIDTH • $@46 ASSIGN $@47 str_or_int
+
+    $default  reduce using rule 117 ($@46)
+
+    $@46  go to state 257
+
+
+State 253
+
+  122 radio_button_attribute_name: LAYOUT_HEIGHT • $@48 ASSIGN $@49 str_or_int
+
+    $default  reduce using rule 120 ($@48)
+
+    $@48  go to state 258
+
+
+State 254
+
+  125 radio_button_attribute_name: ID • ASSIGN STRING
+
+    ASSIGN  shift, and go to state 259
+
+
+State 255
+
+  124 radio_button_attribute_name: TEXT • $@50 ASSIGN STRING
+
+    $default  reduce using rule 123 ($@50)
+
+    $@50  go to state 260
+
+
+State 256
+
+  116 radio_button_attribute: ANDROID COLON $@45 radio_button_attribute_name •
+
+    $default  reduce using rule 116 (radio_button_attribute)
+
+
+State 257
+
+  119 radio_button_attribute_name: LAYOUT_WIDTH $@46 • ASSIGN $@47 str_or_int
+
+    ASSIGN  shift, and go to state 261
+
+
+State 258
+
+  122 radio_button_attribute_name: LAYOUT_HEIGHT $@48 • ASSIGN $@49 str_or_int
+
+    ASSIGN  shift, and go to state 262
+
+
+State 259
+
+  125 radio_button_attribute_name: ID ASSIGN • STRING
+
+    STRING  shift, and go to state 263
+
+
+State 260
+
+  124 radio_button_attribute_name: TEXT $@50 • ASSIGN STRING
+
+    ASSIGN  shift, and go to state 264
+
+
+State 261
+
+  119 radio_button_attribute_name: LAYOUT_WIDTH $@46 ASSIGN • $@47 str_or_int
+
+    $default  reduce using rule 118 ($@47)
+
+    $@47  go to state 265
+
+
+State 262
+
+  122 radio_button_attribute_name: LAYOUT_HEIGHT $@48 ASSIGN • $@49 str_or_int
+
+    $default  reduce using rule 121 ($@49)
+
+    $@49  go to state 266
+
+
+State 263
+
+  125 radio_button_attribute_name: ID ASSIGN STRING •
+
+    $default  reduce using rule 125 (radio_button_attribute_name)
+
+
+State 264
+
+  124 radio_button_attribute_name: TEXT $@50 ASSIGN • STRING
+
+    STRING  shift, and go to state 267
+
+
+State 265
+
+  119 radio_button_attribute_name: LAYOUT_WIDTH $@46 ASSIGN $@47 • str_or_int
+
+    INT     shift, and go to state 97
+    STRING  shift, and go to state 98
+
+    str_or_int  go to state 268
+
+
+State 266
+
+  122 radio_button_attribute_name: LAYOUT_HEIGHT $@48 ASSIGN $@49 • str_or_int
+
+    INT     shift, and go to state 97
+    STRING  shift, and go to state 98
+
+    str_or_int  go to state 269
+
+
+State 267
+
+  124 radio_button_attribute_name: TEXT $@50 ASSIGN STRING •
+
+    $default  reduce using rule 124 (radio_button_attribute_name)
+
+
+State 268
+
+  119 radio_button_attribute_name: LAYOUT_WIDTH $@46 ASSIGN $@47 str_or_int •
+
+    $default  reduce using rule 119 (radio_button_attribute_name)
+
+
+State 269
+
+  122 radio_button_attribute_name: LAYOUT_HEIGHT $@48 ASSIGN $@49 str_or_int •
+
+    $default  reduce using rule 122 (radio_button_attribute_name)
