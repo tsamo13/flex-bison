@@ -18,4 +18,4 @@ Additionally, we define the **yyerror** function which prints an appropriate mes
 
 Finally, every time we reach the end of the file, the **EOF** rule is called (which means there was no syntax error or the program would have terminated already), and then the **Success** message is printed.
 
-The files named "erwtima_error" try to remark some errors based on the questions of the 
+The files named "erwtima_error" try to remark some errors based on the questions of the exercice.
