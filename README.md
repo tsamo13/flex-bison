@@ -19,3 +19,14 @@ Additionally, we define the **yyerror** function which prints an appropriate mes
 Finally, every time we reach the end of the file, the **EOF** rule is called (which means there was no syntax error or the program would have terminated already), and then the **Success** message is printed.
 
 The files named "erwtima_error" try to remark some errors based on the questions of the exercice.
+
+<br><br>
+
+### I have downloaded the WSL (windows subsystem for linux) which is a linux environment and it  allows users to run it, without the need for a separate virtual machine or dual booting, providing a seamless and productive experience for developers who want to use both Windows and Linux at the same time.
+
+
+##  In order to run the program for each file, you must execute the commands below:
+> flex flex.l  
+> bison -v -d bison.y  
+> gcc bison.tab.c lex.yy.c -o parser  
+> ./parser < file >
